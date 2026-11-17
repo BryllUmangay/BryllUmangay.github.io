@@ -4,115 +4,683 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bryll Umangay | Cybersecurity Portfolio</title>
+
+    <meta name="description" content="Bryll Wrex Umangay - IT Helpdesk Engineer and aspiring SOC Analyst. Explore hands-on cybersecurity projects, SOC investigations, detection engineering, and malware analysis.">
+
+    <meta name="author" content="Bryll Wrex Umangay">
+
+    <title>Bryll Wrex Umangay | Cybersecurity Portfolio</title>
 
     <style>
+        :root {
+            --bg: #080e19;
+            --surface: #101a2b;
+            --surface-light: #142238;
+            --border: #24344b;
+            --text: #e8eef7;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.10);
+            --green: #4ade80;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
         body {
-            background: #0b1120;
-            color: #e2e8f0;
-            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(
+                    ellipse at 80% 0%,
+                    rgba(30, 91, 140, 0.13),
+                    transparent 35%
+                ),
+                var(--bg);
+            color: var(--text);
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
             line-height: 1.7;
         }
 
+        a {
+            color: inherit;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        /* NAVIGATION */
+
         header {
-            padding: 25px 10%;
-            border-bottom: 1px solid #263449;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 14, 25, 0.94);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
         }
 
         nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 27px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 13px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 610px;
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            align-items: center;
+            gap: 55px;
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 5.5vw, 65px);
+            line-height: 1.13;
+            margin-bottom: 15px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero h2 {
+            font-size: 18px;
+            color: #c0d0e2;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 11px 21px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .button-primary {
+            background: var(--accent);
+            color: #07111d;
+        }
+
+        .button-primary:hover {
+            background: #7dd3fc;
+            transform: translateY(-2px);
+        }
+
+        .button-secondary {
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .button-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* TERMINAL CARD */
+
+        .terminal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .terminal-header {
+            padding: 14px 18px;
+            background: #152238;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #475569;
+        }
+
+        .terminal-title {
+            color: var(--muted);
+            font-size: 11px;
+            margin-left: 8px;
+        }
+
+        .terminal-content {
+            padding: 25px;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+        }
+
+        .terminal-line {
+            margin-bottom: 13px;
+            color: var(--muted);
+        }
+
+        .terminal-line span {
+            color: var(--green);
+        }
+
+        .terminal-value {
+            color: var(--accent);
+            margin-left: 15px;
+            margin-bottom: 16px;
+        }
+
+        /* SECTION GENERAL */
+
+        section {
+            padding: 80px 0;
+            border-top: 1px solid rgba(36, 52, 75, 0.7);
+        }
+
+        .section-label {
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 30px;
+            margin-bottom: 13px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            font-size: 14px;
+            max-width: 680px;
+            margin-bottom: 35px;
+        }
+
+        /* ABOUT */
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 45px;
+        }
+
+        .about-text {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .about-text p {
+            margin-bottom: 17px;
+        }
+
+        .focus-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 25px;
+        }
+
+        .focus-card h3 {
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .focus-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .focus-item:last-child {
+            border-bottom: none;
+        }
+
+        .focus-item span {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        /* EXPERIENCE */
+
+        .experience-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            padding: 27px;
+            border-radius: 8px;
+        }
+
+        .experience-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 17px;
+        }
+
+        .experience-card h3 {
+            font-size: 17px;
+        }
+
+        .experience-card .company {
+            color: var(--accent);
+            font-size: 13px;
+        }
+
+        .date {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .experience-card ul {
+            padding-left: 20px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .experience-card li {
+            margin-bottom: 9px;
+        }
+
+        /* PROJECTS */
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 27px;
+            display: flex;
+            flex-direction: column;
+            transition: 0.25s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .project-number {
+            color: var(--accent);
+            font-family: Consolas, monospace;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .project-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .project-subtitle {
+            color: var(--accent);
+            font-size: 11px;
+            margin-bottom: 14px;
+        }
+
+        .project-card p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 22px;
+        }
+
+        .tag {
+            color: #9ccce8;
+            background: var(--accent-soft);
+            border: 1px solid rgba(56, 189, 248, 0.13);
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 10px;
+        }
+
+        .project-link {
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .project-link:hover {
+            color: white;
+        }
+
+        /* METHODOLOGY */
+
+        .workflow {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .workflow-item {
+            padding: 20px 10px;
+            text-align: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .workflow-item strong {
+            display: block;
+            color: var(--accent);
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .workflow-item small {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* SKILLS */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 17px;
+        }
+
+        .skill-card {
+            padding: 23px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+        }
+
+        .skill-card h3 {
+            font-size: 15px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .skill-card p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* CERTIFICATIONS AND EDUCATION */
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .credential-card {
+            padding: 27px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+        }
+
+        .credential-card h3 {
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .credential-item {
+            padding: 13px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .credential-item:last-child {
+            border-bottom: none;
+        }
+
+        .credential-item strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .credential-item span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .status {
+            display: inline-block;
+            color: var(--green) !important;
+            font-size: 10px !important;
+            margin-top: 4px;
+        }
+
+        /* CONTACT */
+
+        .contact-box {
+            text-align: center;
+            background: linear-gradient(
+                135deg,
+                #10243a,
+                #101a2b
+            );
+            border: 1px solid var(--border);
+            padding: 55px 25px;
+            border-radius: 12px;
+        }
+
+        .contact-box h2 {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .contact-links a {
+            padding: 10px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--accent);
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .contact-links a:hover {
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 30px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 15px;
+            color: var(--muted);
+            font-size: 11px;
         }
 
-        nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            margin-left: 18px;
-        }
+        /* RESPONSIVE */
 
-        .hero {
-            padding: 100px 10%;
-            max-width: 1100px;
-        }
+        @media (max-width: 850px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
 
-        .hero h1 {
-            font-size: 46px;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
+            .terminal {
+                max-width: 550px;
+            }
 
-        .hero span {
-            color: #38bdf8;
-        }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
 
-        .hero p {
-            max-width: 650px;
-            color: #94a3b8;
-        }
-
-        section {
-            padding: 55px 10%;
-        }
-
-        h2 {
-            color: #38bdf8;
-            margin-bottom: 20px;
-        }
-
-        .projects {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: #151f32;
-            border: 1px solid #263449;
-            padding: 25px;
-            border-radius: 10px;
-        }
-
-        .card h3 {
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: #94a3b8;
-            margin-bottom: 15px;
-        }
-
-        .card a {
-            color: #38bdf8;
-            text-decoration: none;
-        }
-
-        .skills {
-            color: #cbd5e1;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid #263449;
-            color: #64748b;
+            .workflow {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 34px;
+            .container {
+                width: 91%;
             }
-            nav a {
-                margin-left: 8px;
+
+            nav {
+                padding: 15px 0;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 75px;
+                padding-bottom: 65px;
+            }
+
+            .hero h1 {
+                font-size: 39px;
+            }
+
+            .hero h2 {
+                font-size: 15px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 25px;
+            }
+
+            .project-grid,
+            .skills-grid,
+            .credentials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-box h2 {
+                font-size: 24px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -120,109 +688,724 @@
 
 <body>
 
+<!-- NAVIGATION -->
+
 <header>
-    <nav>
-        <strong>Bryll Umangay</strong>
-        <div>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
+    <div class="container">
+        <nav>
+            <a class="brand" href="#home">BW / CYBERSECURITY</a>
+
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#credentials">Credentials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
 </header>
 
-<div class="hero">
-    <h1>Hi, I'm <span>Bryll Umangay</span></h1>
-    <h2>IT Helpdesk Engineer | Aspiring Cybersecurity Professional</h2>
 
-    <p>
-        IT professional developing hands-on experience in
-        Security Operations, Incident Response, Threat Detection,
-        Windows Administration, and Network Security.
-        I document my cybersecurity labs, investigations,
-        and technical learning journey here.
-    </p>
-</div>
+<!-- HERO -->
+
+<main id="home">
+    <div class="container">
+        <div class="hero">
+
+            <div>
+                <div class="eyebrow">
+                    IT SUPPORT / SECURITY OPERATIONS / DEFENSIVE RESEARCH
+                </div>
+
+                <h1>
+                    BRYLL WREX
+                    <span>UMANGAY.</span>
+                </h1>
+
+                <h2>
+                    IT Helpdesk Engineer |
+                    Aspiring SOC Analyst |
+                    Cybersecurity Enthusiast
+                </h2>
+
+                <p class="hero-description">
+                    Information Technology graduate with hands-on
+                    experience in Level 1 technical support,
+                    Windows administration, and troubleshooting.
+
+                    Building practical cybersecurity skills through
+                    SOC home labs, SIEM investigations, detection
+                    engineering, and malware analysis.
+                </p>
+
+                <div class="buttons">
+                    <a href="#projects" class="button button-primary">
+                        Explore My Projects
+                    </a>
+
+                    <a href="#contact" class="button button-secondary">
+                        Get In Touch
+                    </a>
+
+                    <!-- Add your PDF CV to the assets folder
+                         before using this download button. -->
+
+                    <a
+                        href="assets/Bryll-Wrex-Umangay-CV.pdf"
+                        class="button button-secondary"
+                        download
+                    >
+                        Download CV
+                    </a>
+                </div>
+            </div>
+
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="terminal-title">
+                        bryll@cyber-lab: ~
+                    </div>
+                </div>
+
+                <div class="terminal-content">
+
+                    <div class="terminal-line">
+                        <span>$</span> whoami
+                    </div>
+                    <div class="terminal-value">
+                        Bryll Wrex Umangay
+                    </div>
+
+                    <div class="terminal-line">
+                        <span>$</span> current_focus
+                    </div>
+                    <div class="terminal-value">
+                        Security Operations
+                    </div>
+
+                    <div class="terminal-line">
+                        <span>$</span> specialization
+                    </div>
+                    <div class="terminal-value">
+                        SIEM / Detection / Investigation
+                    </div>
+
+                    <div class="terminal-line">
+                        <span>$</span> environment
+                    </div>
+                    <div class="terminal-value">
+                        Wazuh / Windows / Linux / AD
+                    </div>
+
+                    <div class="terminal-line">
+                        <span>$</span> location
+                    </div>
+                    <div class="terminal-value">
+                        Makati, Philippines
+                    </div>
+
+                    <div class="terminal-line">
+                        <span>$</span> status
+                    </div>
+                    <div class="terminal-value">
+                        <span>Learning. Building. Investigating.</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+
+<!-- ABOUT -->
 
 <section id="about">
-    <h2>About Me</h2>
-    <p>
-        I am an Information Technology graduate with experience
-        in IT support and troubleshooting. I am currently
-        developing my cybersecurity skills through practical
-        security labs, SIEM investigations, malware analysis,
-        and hands-on defensive security projects.
-    </p>
-</section>
+    <div class="container">
 
-<section id="projects">
-    <h2>Featured Projects</h2>
+        <div class="section-label">01 / PROFILE</div>
+        <h2 class="section-title">About Me</h2>
 
-    <div class="projects">
+        <div class="about-content">
 
-        <div class="card">
-            <h3>SOC Analyst Portfolio</h3>
-            <p>
-                Hands-on SOC investigations, alert analysis,
-                Windows event monitoring, and security
-                incident documentation.
-            </p>
-            <a href="https://github.com/BryllUmangay/SOC-analyst-portfolio">
-                View Project →
-            </a>
+            <div class="about-text">
+                <p>
+                    I am an Information Technology graduate and
+                    IT Helpdesk Engineer with experience supporting
+                    Windows environments, administering Active
+                    Directory, resolving end-user issues, and
+                    troubleshooting hardware, software, and
+                    network-related problems.
+                </p>
+
+                <p>
+                    My professional development is focused on
+                    transitioning into cybersecurity, particularly
+                    Security Operations Center (SOC) analysis,
+                    threat detection, incident investigation, and
+                    defensive security research.
+                </p>
+
+                <p>
+                    I build isolated laboratory environments to
+                    understand attacker behavior, validate endpoint
+                    telemetry, investigate security alerts, identify
+                    indicators of compromise, and document findings.
+                    My goal is to develop practical skills that
+                    translate into real-world defensive operations.
+                </p>
+            </div>
+
+            <div class="focus-card">
+                <h3>Current Learning Focus</h3>
+
+                <div class="focus-item">
+                    <span>01.</span> SOC Operations & Alert Triage
+                </div>
+
+                <div class="focus-item">
+                    <span>02.</span> Wazuh SIEM & Detection Engineering
+                </div>
+
+                <div class="focus-item">
+                    <span>03.</span> Windows Event Log Investigation
+                </div>
+
+                <div class="focus-item">
+                    <span>04.</span> Active Directory Security
+                </div>
+
+                <div class="focus-item">
+                    <span>05.</span> Malware Analysis & Threat Hunting
+                </div>
+            </div>
+
         </div>
-
-        <div class="card">
-            <h3>Malware Analysis</h3>
-            <p>
-                Defensive research involving malware behavior,
-                host-based indicators, network activity,
-                and analysis documentation.
-            </p>
-            <a href="YOUR-MALWARE-REPOSITORY-LINK">
-                View Project →
-            </a>
-        </div>
-
-        <div class="card">
-            <h3>Windows Security Research</h3>
-            <p>
-                Windows API research, security testing,
-                and defensive investigation of
-                post-exploitation techniques.
-            </p>
-            <a href="YOUR-WINDOWS-REPOSITORY-LINK">
-                View Project →
-            </a>
-        </div>
-
     </div>
 </section>
 
-<section id="skills">
-    <h2>Technical Skills</h2>
-    <p class="skills">
-        SIEM | Wazuh | Windows Event Logs | Sysmon |
-        Active Directory | Linux | Networking |
-        Wireshark | Nmap | Kali Linux |
-        Incident Response | PowerShell | GitHub
-    </p>
+
+<!-- EXPERIENCE -->
+
+<section id="experience">
+    <div class="container">
+
+        <div class="section-label">02 / PROFESSIONAL BACKGROUND</div>
+        <h2 class="section-title">Work Experience</h2>
+
+        <p class="section-description">
+            My professional foundation in IT support,
+            troubleshooting, and Windows administration.
+        </p>
+
+        <div class="experience-card">
+
+            <div class="experience-top">
+                <div>
+                    <h3>IT Helpdesk Engineer</h3>
+                    <div class="company">
+                        OPUS CORPORATION
+                    </div>
+                    <div class="date">
+                        Level 1 Technical Support
+                    </div>
+                </div>
+
+                <div class="date">
+                    June 2025 – Present
+                </div>
+            </div>
+
+            <ul>
+                <li>
+                    Provide frontline technical support to end users,
+                    resolving hardware, software, and network issues
+                    across Windows desktop environments.
+                </li>
+
+                <li>
+                    Administer Active Directory, including user
+                    account provisioning, password resets, group
+                    membership management, and access control.
+                </li>
+
+                <li>
+                    Deploy and configure printers, peripherals,
+                    and standard software; perform remote support
+                    and on-site troubleshooting.
+                </li>
+
+                <li>
+                    Document incidents and resolutions and
+                    contribute to knowledge-base documentation
+                    to improve support processes.
+                </li>
+            </ul>
+
+        </div>
+    </div>
 </section>
+
+
+<!-- PROJECTS -->
+
+<section id="projects">
+    <div class="container">
+
+        <div class="section-label">03 / HANDS-ON EXPERIENCE</div>
+        <h2 class="section-title">Cybersecurity Projects</h2>
+
+        <p class="section-description">
+            Practical security projects conducted in isolated,
+            personally controlled laboratory environments.
+            Each project includes technical documentation,
+            observations, and defensive learning outcomes.
+        </p>
+
+        <div class="project-grid">
+
+            <!-- PROJECT 01 -->
+
+            <article class="project-card">
+
+                <div class="project-number">PROJECT_01 / SOC</div>
+
+                <h3>SOC Analyst Portfolio</h3>
+
+                <div class="project-subtitle">
+                    DETECTION ENGINEERING & INCIDENT INVESTIGATION
+                </div>
+
+                <p>
+                    A hands-on SOC home lab built around Wazuh SIEM,
+                    Sysmon, Windows endpoints, Active Directory,
+                    and Kali Linux.
+
+                    Documents simulated security scenarios and
+                    defensive investigations, including SMB brute
+                    force, password spraying, suspicious PowerShell,
+                    scheduled-task persistence, event-log clearing,
+                    and Kerberoasting.
+
+                    Each case covers telemetry validation, Wazuh
+                    alert analysis, indicators of compromise,
+                    investigation timelines, MITRE ATT&CK mapping,
+                    and remediation recommendations.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Wazuh SIEM</span>
+                    <span class="tag">Sysmon</span>
+                    <span class="tag">Windows Logs</span>
+                    <span class="tag">Active Directory</span>
+                    <span class="tag">Sigma</span>
+                    <span class="tag">MITRE ATT&CK</span>
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/BryllUmangay/SOC-analyst-portfolio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View Repository →
+                </a>
+
+            </article>
+
+
+            <!-- PROJECT 02 -->
+
+            <article class="project-card">
+
+                <div class="project-number">PROJECT_02 / HOST SECURITY</div>
+
+                <h3>Post-Compromise Operations on Windows & Linux</h3>
+
+                <div class="project-subtitle">
+                    CONTROLLED ATTACK-LIFECYCLE LAB
+                </div>
+
+                <p>
+                    A controlled Windows 10 Pro and Ubuntu Server
+                    laboratory demonstrating post-compromise
+                    behaviors across Windows and Linux hosts.
+
+                    Covers initial-access simulation, reverse-shell
+                    behavior, host reconnaissance, privilege and
+                    credential-related security testing, data
+                    access, and persistence demonstrations.
+
+                    The project explores the security implications
+                    of these activities and provides an opportunity
+                    to understand the telemetry and defensive
+                    controls relevant to compromised systems.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Kali Linux</span>
+                    <span class="tag">Metasploit</span>
+                    <span class="tag">Windows 10 Pro</span>
+                    <span class="tag">Ubuntu</span>
+                    <span class="tag">Mimikatz</span>
+                    <span class="tag">WinPEAS</span>
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/BryllUmangay/Post-Compromise-Operations-on-Windows-Linux-Hosts"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View Repository →
+                </a>
+
+            </article>
+
+
+            <!-- PROJECT 03 -->
+
+            <article class="project-card">
+
+                <div class="project-number">PROJECT_03 / MALWARE RESEARCH</div>
+
+                <h3>Remote Access Trojan Malware Analysis</h3>
+
+                <div class="project-subtitle">
+                    NJRAT V0.7D / STATIC & DYNAMIC ANALYSIS
+                </div>
+
+                <p>
+                    An isolated virtual-machine malware analysis
+                    laboratory focused on understanding NjRAT
+                    behavior and identifying indicators of
+                    compromise.
+
+                    Conducted static and dynamic analysis,
+                    monitored process and registry activity,
+                    examined network communications using
+                    FakeNet-NG and Wireshark, and documented
+                    persistence behavior, malware characteristics,
+                    and MITRE ATT&CK techniques.
+
+                    The repository focuses on malware understanding,
+                    threat identification, and defensive research.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Procmon</span>
+                    <span class="tag">FakeNet-NG</span>
+                    <span class="tag">PE Studio</span>
+                    <span class="tag">Wireshark</span>
+                    <span class="tag">YARA</span>
+                    <span class="tag">IOC Analysis</span>
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/BryllUmangay/Remote_access_TROJAN_malware_analysis"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View Repository →
+                </a>
+
+            </article>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- INVESTIGATION METHODOLOGY -->
+
+<section id="methodology">
+    <div class="container">
+
+        <div class="section-label">04 / ANALYST WORKFLOW</div>
+        <h2 class="section-title">My Investigation Approach</h2>
+
+        <p class="section-description">
+            A structured approach to understanding security events
+            and documenting laboratory investigations.
+        </p>
+
+        <div class="workflow">
+
+            <div class="workflow-item">
+                <strong>01. Understand</strong>
+                <small>Identify the scenario</small>
+            </div>
+
+            <div class="workflow-item">
+                <strong>02. Simulate</strong>
+                <small>Generate lab activity</small>
+            </div>
+
+            <div class="workflow-item">
+                <strong>03. Detect</strong>
+                <small>Validate telemetry</small>
+            </div>
+
+            <div class="workflow-item">
+                <strong>04. Investigate</strong>
+                <small>Analyze evidence</small>
+            </div>
+
+            <div class="workflow-item">
+                <strong>05. Document</strong>
+                <small>Conclude & recommend</small>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- TECHNICAL SKILLS -->
+
+<section id="skills">
+    <div class="container">
+
+        <div class="section-label">05 / TECHNICAL CAPABILITIES</div>
+        <h2 class="section-title">Technical Skills</h2>
+
+        <p class="section-description">
+            Technologies, platforms, and tools used in my
+            professional IT support work and hands-on labs.
+        </p>
+
+        <div class="skills-grid">
+
+            <div class="skill-card">
+                <h3>SOC & Detection Engineering</h3>
+                <p>
+                    Wazuh SIEM, Sysmon, Windows Event Logs,
+                    Sigma, Custom Wazuh Rules, DQL/KQL,
+                    MITRE ATT&CK Mapping, Alert Triage,
+                    IOC Analysis, Incident Response.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Windows & Active Directory</h3>
+                <p>
+                    Windows Troubleshooting, Windows Server,
+                    Active Directory Domain Services,
+                    DNS, Group Policy, Kerberos, NTLM,
+                    IIS, User Administration, Access Control.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Network & Security Tools</h3>
+                <p>
+                    TCP/IP, DNS, SMB, Wireshark, Nmap,
+                    Kali Linux, NetExec, Impacket,
+                    Hashcat, Metasploit, Mimikatz.
+                    Used for controlled security testing and lab work.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Malware & Threat Research</h3>
+                <p>
+                    Static Analysis, Dynamic Analysis,
+                    Process Monitoring, IOC Identification,
+                    FakeNet-NG, Procmon, PE Studio,
+                    Network Traffic Analysis, YARA.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Cloud Infrastructure</h3>
+                <p>
+                    AWS EC2, VPC, Subnets, Route Tables,
+                    Internet Gateway, NAT Gateway,
+                    Security Groups, Application Load Balancer,
+                    Azure Fundamentals, Cloud Networking.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Infrastructure & Linux</h3>
+                <p>
+                    Ubuntu Linux, Nginx, Docker, VMware,
+                    Git/GitHub, Windows Server,
+                    Active Directory, DNS, Group Policy.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <h3>Scripting & Automation</h3>
+                <p>
+                    PowerShell, Bash, Python (Basic),
+                    C (Basic), Windows Administration,
+                    Troubleshooting Automation.
+                </p>
+            </div>
+
+            <div class="skill-card">
+                <h3>IT Support & Administration</h3>
+                <p>
+                    Level 1 Technical Support, Windows
+                    Troubleshooting, Hardware and Software
+                    Support, Printer Deployment, Remote Support,
+                    Ticket Documentation.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- CERTIFICATIONS AND EDUCATION -->
+
+<section id="credentials">
+    <div class="container">
+
+        <div class="section-label">06 / QUALIFICATIONS</div>
+        <h2 class="section-title">Certifications & Education</h2>
+
+        <div class="credentials-grid">
+
+            <div class="credential-card">
+                <h3>Certifications & Training</h3>
+
+                <div class="credential-item">
+                    <strong>Fortinet NSE 1</strong>
+                    <span>Network Security Associate</span>
+                </div>
+
+                <div class="credential-item">
+                    <strong>Fortinet NSE 2</strong>
+                    <span>Network Security Associate</span>
+                </div>
+
+                <div class="credential-item">
+                    <strong>Viettel MSOC Training</strong>
+                    <span>Security Operations Training</span>
+                    <span class="status">IN PROGRESS</span>
+                </div>
+
+                <div class="credential-item">
+                    <strong>CompTIA Security+</strong>
+                    <span>Cybersecurity Certification</span>
+                    <span class="status">PURSUING</span>
+                </div>
+            </div>
+
+
+            <div class="credential-card">
+                <h3>Education</h3>
+
+                <div class="credential-item">
+                    <strong>
+                        Bachelor of Science in Information Technology
+                    </strong>
+                    <span>Golden West Colleges</span>
+                    <br>
+                    <span>Alaminos City, Pangasinan</span>
+                    <br>
+                    <span class="status">GRADUATED · 2025</span>
+                </div>
+
+                <div class="credential-item">
+                    <strong>Academic Period</strong>
+                    <span>2021 – 2025</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- CONTACT -->
 
 <section id="contact">
-    <h2>Connect With Me</h2>
-    <p>GitHub:
-        <a href="https://github.com/BryllUmangay">
-            github.com/BryllUmangay
-        </a>
-    </p>
-    <p>Email: YOUR-EMAIL-ADDRESS</p>
+    <div class="container">
+
+        <div class="contact-box">
+
+            <div class="section-label">
+                07 / LET'S CONNECT
+            </div>
+
+            <h2>Let's Connect.</h2>
+
+            <p>
+                Interested in my projects, technical work,
+                or potential cybersecurity opportunities?
+                Feel free to reach out.
+            </p>
+
+            <div class="contact-links">
+
+                <a href="mailto:vryllumangay@gmail.com">
+                    Email Me
+                </a>
+
+                <a
+                    href="https://github.com/BryllUmangay"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub
+                </a>
+
+                <a
+                    href="https://www.linkedin.com/in/bryll-wrex-umangay"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    LinkedIn
+                </a>
+
+                <a href="tel:+639774084746">
+                    +63 977 408 4746
+                </a>
+
+            </div>
+
+        </div>
+    </div>
 </section>
 
+
+<!-- FOOTER -->
+
 <footer>
-    <p>© 2026 Bryll Umangay | Cybersecurity Portfolio</p>
+    <div class="container">
+        <div class="footer-content">
+
+            <p>
+                © <span id="year">2026</span>
+                Bryll Wrex Umangay.
+                All rights reserved.
+            </p>
+
+            <p>
+                Built with HTML, CSS & GitHub Pages.
+            </p>
+
+        </div>
+    </div>
 </footer>
+
+
+<script>
+    // Automatically update the copyright year.
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+</script>
 
 </body>
 </html>
