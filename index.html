@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bryll Umangay | Cybersecurity Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b1120;
+            color: #e2e8f0;
+            font-family: Arial, sans-serif;
+            line-height: 1.7;
+        }
+
+        header {
+            padding: 25px 10%;
+            border-bottom: 1px solid #263449;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-left: 18px;
+        }
+
+        .hero {
+            padding: 100px 10%;
+            max-width: 1100px;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .hero span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: #94a3b8;
+        }
+
+        section {
+            padding: 55px 10%;
+        }
+
+        h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #151f32;
+            border: 1px solid #263449;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .card a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        .skills {
+            color: #cbd5e1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #263449;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+            nav a {
+                margin-left: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <strong>Bryll Umangay</strong>
+        <div>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+</header>
+
+<div class="hero">
+    <h1>Hi, I'm <span>Bryll Umangay</span></h1>
+    <h2>IT Helpdesk Engineer | Aspiring Cybersecurity Professional</h2>
+
+    <p>
+        IT professional developing hands-on experience in
+        Security Operations, Incident Response, Threat Detection,
+        Windows Administration, and Network Security.
+        I document my cybersecurity labs, investigations,
+        and technical learning journey here.
+    </p>
+</div>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p>
+        I am an Information Technology graduate with experience
+        in IT support and troubleshooting. I am currently
+        developing my cybersecurity skills through practical
+        security labs, SIEM investigations, malware analysis,
+        and hands-on defensive security projects.
+    </p>
+</section>
+
+<section id="projects">
+    <h2>Featured Projects</h2>
+
+    <div class="projects">
+
+        <div class="card">
+            <h3>SOC Analyst Portfolio</h3>
+            <p>
+                Hands-on SOC investigations, alert analysis,
+                Windows event monitoring, and security
+                incident documentation.
+            </p>
+            <a href="https://github.com/BryllUmangay/SOC-analyst-portfolio">
+                View Project →
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>Malware Analysis</h3>
+            <p>
+                Defensive research involving malware behavior,
+                host-based indicators, network activity,
+                and analysis documentation.
+            </p>
+            <a href="YOUR-MALWARE-REPOSITORY-LINK">
+                View Project →
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>Windows Security Research</h3>
+            <p>
+                Windows API research, security testing,
+                and defensive investigation of
+                post-exploitation techniques.
+            </p>
+            <a href="YOUR-WINDOWS-REPOSITORY-LINK">
+                View Project →
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<section id="skills">
+    <h2>Technical Skills</h2>
+    <p class="skills">
+        SIEM | Wazuh | Windows Event Logs | Sysmon |
+        Active Directory | Linux | Networking |
+        Wireshark | Nmap | Kali Linux |
+        Incident Response | PowerShell | GitHub
+    </p>
+</section>
+
+<section id="contact">
+    <h2>Connect With Me</h2>
+    <p>GitHub:
+        <a href="https://github.com/BryllUmangay">
+            github.com/BryllUmangay
+        </a>
+    </p>
+    <p>Email: YOUR-EMAIL-ADDRESS</p>
+</section>
+
+<footer>
+    <p>© 2026 Bryll Umangay | Cybersecurity Portfolio</p>
+</footer>
+
+</body>
+</html>
