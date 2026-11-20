@@ -1,1411 +1,1213 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="Bryll Wrex Umangay - IT Helpdesk Engineer and aspiring SOC Analyst. Explore hands-on cybersecurity projects, SOC investigations, detection engineering, and malware analysis.">
-
-    <meta name="author" content="Bryll Wrex Umangay">
-
-    <title>Bryll Wrex Umangay | Cybersecurity Portfolio</title>
-
-    <style>
-        :root {
-            --bg: #080e19;
-            --surface: #101a2b;
-            --surface-light: #142238;
-            --border: #24344b;
-            --text: #e8eef7;
-            --muted: #94a3b8;
-            --accent: #38bdf8;
-            --accent-soft: rgba(56, 189, 248, 0.10);
-            --green: #4ade80;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 90px;
-        }
-
-        body {
-            background:
-                radial-gradient(
-                    ellipse at 80% 0%,
-                    rgba(30, 91, 140, 0.13),
-                    transparent 35%
-                ),
-                var(--bg);
-            color: var(--text);
-            font-family: Inter, "Segoe UI", Arial, sans-serif;
-            line-height: 1.7;
-        }
-
-        a {
-            color: inherit;
-        }
-
-        .container {
-            width: 88%;
-            max-width: 1150px;
-            margin: auto;
-        }
-
-        /* NAVIGATION */
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(8, 14, 25, 0.94);
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        nav {
-            min-height: 76px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .brand {
-            color: var(--accent);
-            font-weight: 800;
-            font-size: 16px;
-            letter-spacing: 1px;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 27px;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: var(--muted);
-            font-size: 13px;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        /* HERO */
-
-        .hero {
-            min-height: 610px;
-            display: grid;
-            grid-template-columns: 1.4fr 0.8fr;
-            align-items: center;
-            gap: 55px;
-            padding-top: 70px;
-            padding-bottom: 70px;
-        }
-
-        .eyebrow {
-            color: var(--accent);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: clamp(38px, 5.5vw, 65px);
-            line-height: 1.13;
-            margin-bottom: 15px;
-            letter-spacing: -2px;
-        }
-
-        .hero h1 span {
-            color: var(--accent);
-        }
-
-        .hero h2 {
-            font-size: 18px;
-            color: #c0d0e2;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        .hero-description {
-            max-width: 650px;
-            color: var(--muted);
-            font-size: 15px;
-            margin-bottom: 28px;
-        }
-
-        .buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 11px 21px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .button-primary {
-            background: var(--accent);
-            color: #07111d;
-        }
-
-        .button-primary:hover {
-            background: #7dd3fc;
-            transform: translateY(-2px);
-        }
-
-        .button-secondary {
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
-
-        .button-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* TERMINAL CARD */
-
-        .terminal {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-        }
-
-        .terminal-header {
-            padding: 14px 18px;
-            background: #152238;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-
-        .dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: #475569;
-        }
-
-        .terminal-title {
-            color: var(--muted);
-            font-size: 11px;
-            margin-left: 8px;
-        }
-
-        .terminal-content {
-            padding: 25px;
-            font-family: Consolas, monospace;
-            font-size: 13px;
-        }
-
-        .terminal-line {
-            margin-bottom: 13px;
-            color: var(--muted);
-        }
-
-        .terminal-line span {
-            color: var(--green);
-        }
-
-        .terminal-value {
-            color: var(--accent);
-            margin-left: 15px;
-            margin-bottom: 16px;
-        }
-
-        /* SECTION GENERAL */
-
-        section {
-            padding: 80px 0;
-            border-top: 1px solid rgba(36, 52, 75, 0.7);
-        }
-
-        .section-label {
-            color: var(--accent);
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
-
-        .section-title {
-            font-size: 30px;
-            margin-bottom: 13px;
-            letter-spacing: -0.5px;
-        }
-
-        .section-description {
-            color: var(--muted);
-            font-size: 14px;
-            max-width: 680px;
-            margin-bottom: 35px;
-        }
-
-        /* ABOUT */
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 45px;
-        }
-
-        .about-text {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .about-text p {
-            margin-bottom: 17px;
-        }
-
-        .focus-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 25px;
-        }
-
-        .focus-card h3 {
-            font-size: 15px;
-            margin-bottom: 18px;
-        }
-
-        .focus-item {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 13px;
-            color: var(--muted);
-        }
-
-        .focus-item:last-child {
-            border-bottom: none;
-        }
-
-        .focus-item span {
-            color: var(--accent);
-            margin-right: 8px;
-        }
-
-        /* EXPERIENCE */
-
-        .experience-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--accent);
-            padding: 27px;
-            border-radius: 8px;
-        }
-
-        .experience-top {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 17px;
-        }
-
-        .experience-card h3 {
-            font-size: 17px;
-        }
-
-        .experience-card .company {
-            color: var(--accent);
-            font-size: 13px;
-        }
-
-        .date {
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .experience-card ul {
-            padding-left: 20px;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .experience-card li {
-            margin-bottom: 9px;
-        }
-
-        /* PROJECTS */
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .project-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 27px;
-            display: flex;
-            flex-direction: column;
-            transition: 0.25s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .project-number {
-            color: var(--accent);
-            font-family: Consolas, monospace;
-            font-size: 12px;
-            margin-bottom: 15px;
-        }
-
-        .project-card h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .project-subtitle {
-            color: var(--accent);
-            font-size: 11px;
-            margin-bottom: 14px;
-        }
-
-        .project-card p {
-            color: var(--muted);
-            font-size: 13px;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-bottom: 22px;
-        }
-
-        .tag {
-            color: #9ccce8;
-            background: var(--accent-soft);
-            border: 1px solid rgba(56, 189, 248, 0.13);
-            border-radius: 4px;
-            padding: 4px 8px;
-            font-size: 10px;
-        }
-
-        .project-link {
-            color: var(--accent);
-            font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .project-link:hover {
-            color: white;
-        }
-
-        /* METHODOLOGY */
-
-        .workflow {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-        }
-
-        .workflow-item {
-            padding: 20px 10px;
-            text-align: center;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-        }
-
-        .workflow-item strong {
-            display: block;
-            color: var(--accent);
-            font-size: 13px;
-            margin-bottom: 5px;
-        }
-
-        .workflow-item small {
-            color: var(--muted);
-            font-size: 10px;
-        }
-
-        /* SKILLS */
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 17px;
-        }
-
-        .skill-card {
-            padding: 23px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 9px;
-        }
-
-        .skill-card h3 {
-            font-size: 15px;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-
-        .skill-card p {
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        /* CERTIFICATIONS AND EDUCATION */
-
-        .credentials-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .credential-card {
-            padding: 27px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 9px;
-        }
-
-        .credential-card h3 {
-            margin-bottom: 20px;
-            font-size: 17px;
-        }
-
-        .credential-item {
-            padding: 13px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .credential-item:last-child {
-            border-bottom: none;
-        }
-
-        .credential-item strong {
-            display: block;
-            font-size: 13px;
-        }
-
-        .credential-item span {
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .status {
-            display: inline-block;
-            color: var(--green) !important;
-            font-size: 10px !important;
-            margin-top: 4px;
-        }
-
-        /* CONTACT */
-
-        .contact-box {
-            text-align: center;
-            background: linear-gradient(
-                135deg,
-                #10243a,
-                #101a2b
-            );
-            border: 1px solid var(--border);
-            padding: 55px 25px;
-            border-radius: 12px;
-        }
-
-        .contact-box h2 {
-            font-size: 30px;
-            margin-bottom: 12px;
-        }
-
-        .contact-box p {
-            color: var(--muted);
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .contact-links a {
-            padding: 10px 18px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            text-decoration: none;
-            color: var(--accent);
-            font-size: 12px;
-            transition: 0.2s;
-        }
-
-        .contact-links a:hover {
-            border-color: var(--accent);
-            color: white;
-        }
-
-        /* FOOTER */
-
-        footer {
-            padding: 30px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-            color: var(--muted);
-            font-size: 11px;
-        }
-
-        /* RESPONSIVE */
-
-        @media (max-width: 850px) {
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
-
-            .terminal {
-                max-width: 550px;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .workflow {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                width: 91%;
-            }
-
-            nav {
-                padding: 15px 0;
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .nav-links {
-                gap: 15px;
-            }
-
-            .nav-links a {
-                font-size: 11px;
-            }
-
-            .hero {
-                min-height: auto;
-                padding-top: 75px;
-                padding-bottom: 65px;
-            }
-
-            .hero h1 {
-                font-size: 39px;
-            }
-
-            .hero h2 {
-                font-size: 15px;
-            }
-
-            section {
-                padding: 60px 0;
-            }
-
-            .section-title {
-                font-size: 25px;
-            }
-
-            .project-grid,
-            .skills-grid,
-            .credentials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .workflow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .contact-box h2 {
-                font-size: 24px;
-            }
-
-            .footer-content {
-                flex-direction: column;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bryll Wrex Umangay — IT support, detection engineering</title>
+<meta name="description" content="Bryll Wrex Umangay, IT helpdesk engineer in Makati, moving into security operations: a Wazuh detection lab, seven documented case files, post-compromise work and malware analysis.">
+<meta name="author" content="Bryll Wrex Umangay">
+<meta name="theme-color" content="#E8EAE4">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bryll Wrex Umangay — IT support, detection engineering">
+<meta property="og:description" content="Level 1 support by day. A Wazuh detection lab, seven documented case files and malware analysis after hours.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101B21'/%3E%3Cpath d='M9 8h8a5 5 0 0 1 0 10H9zM9 18h9a5 5 0 0 1 0 10H9z' fill='none' stroke='%23F0653A' stroke-width='2.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --ground: #e8eae4;
+    --ink: #101b21;
+    --ink-soft: #26343b;
+    --muted: #55646b;
+    --line: #c7cdc7;
+    --line-soft: #d6dad4;
+    --accent: #b8371a;
+    --panel: #0f1b21;
+    --panel-ink: #e9ebe6;
+    --panel-muted: #a9b6ba;
+    --panel-accent: #f0653a;
+
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+    --step-0: clamp(1rem, 0.96rem + 0.18vw, 1.0625rem);
+    --step-1: clamp(1.15rem, 1.06rem + 0.4vw, 1.4rem);
+    --step-2: clamp(1.75rem, 1.35rem + 1.9vw, 2.85rem);
+    --step-4: clamp(3rem, 6.9vw, 5.8rem);
+
+    --pad: clamp(1.25rem, 0.5rem + 3vw, 3.25rem);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font: 400 var(--step-0)/1.62 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  p { margin: 0; text-wrap: pretty; }
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: var(--ground); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .contact :focus-visible,
+  .log :focus-visible { outline-color: var(--panel-accent); }
+
+  .wrap {
+    width: min(1180px, 100% - 2 * var(--pad));
+    margin-inline: auto;
+  }
+
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--ink);
+    color: var(--ground);
+    padding: 0.75rem 1rem;
+    z-index: 200;
+  }
+  .skip:focus { left: 1rem; top: 1rem; }
+
+  /* ---------- header ---------- */
+
+  .site-head {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(232, 234, 228, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .head-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 4.1rem;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .brand-mark {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: var(--ground);
+    background: var(--ink);
+    padding: 0.25rem 0.45rem 0.3rem;
+  }
+
+  .brand-name {
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    color: var(--muted);
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 1.9rem);
+    flex-wrap: wrap;
+  }
+
+  .site-nav a {
+    color: var(--ink-soft);
+    font-size: 0.83rem;
+    text-decoration: none;
+    padding-block: 0.85rem;
+  }
+
+  .site-nav a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 1px;
+  }
+
+  .site-nav .nav-mail { color: var(--accent); }
+
+  /* ---------- hero ---------- */
+
+  .hero { padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(3rem, 6vw, 5rem); }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: var(--step-4);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .hero-role {
+    margin-top: 1.1rem;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-lede {
+    margin-top: 1.6rem;
+    max-width: 46ch;
+    color: var(--ink-soft);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.12rem);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.85rem;
+    padding: 0.65rem 1.35rem;
+    font-size: 0.87rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .btn-primary { background: var(--ink); color: var(--ground); }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    margin-top: 2.2rem;
+    font-family: var(--mono);
+    font-size: 0.71rem;
+    color: var(--muted);
+  }
+
+  .hero-meta span { position: relative; }
+  .hero-meta span + span::before {
+    content: "";
+    position: absolute;
+    left: -0.75rem;
+    top: 0.28em;
+    width: 1px;
+    height: 0.9em;
+    background: var(--line);
+  }
+
+  /* ---------- event log ---------- */
+
+  .log {
+    background: var(--panel);
+    color: var(--panel-ink);
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    padding-bottom: 0.6rem;
+    align-self: start;
+  }
+
+  .log-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.95rem 1.4rem;
+    border-bottom: 1px solid rgba(233, 235, 230, 0.14);
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--panel-muted);
+  }
+
+  .log-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 1.4rem 0;
+    font-size: 0.8rem;
+  }
+
+  .log-list li {
+    display: grid;
+    grid-template-columns: 4.4rem 3.4rem minmax(0, 1fr);
+    gap: 0.6rem;
+    align-items: baseline;
+    padding: 0.62rem 0;
+    border-bottom: 1px solid rgba(233, 235, 230, 0.08);
+  }
+
+  .log-list li:last-child { border-bottom: 0; }
+
+  .log-list time {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--panel-muted);
+  }
+
+  .log-list .tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--panel-accent);
+  }
+
+  .log-list p { color: var(--panel-ink); font-size: 0.79rem; line-height: 1.45; }
+
+  .log-now {
+    grid-template-columns: 1.2rem minmax(0, 1fr) !important;
+    padding-top: 0.9rem !important;
+  }
+
+  .log-now .prompt {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--panel-accent);
+  }
+
+  .log-now p {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--panel-muted);
+  }
+
+  .caret {
+    color: var(--panel-accent);
+    animation: blink 1.3s steps(1) infinite;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- sections ---------- */
+
+  section { padding-block: clamp(3.25rem, 6.5vw, 6rem); border-top: 1px solid var(--line); }
+
+  .head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1rem, 3vw, 3.5rem);
+    align-items: end;
+    margin-bottom: clamp(2rem, 4vw, 3.4rem);
+  }
+
+  h2 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: var(--step-2);
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+  }
+
+  .head p { color: var(--muted); max-width: 50ch; font-size: 0.98rem; }
+
+  /* ---------- lab chain ---------- */
+
+  .chain {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+  }
+
+  .chain > div {
+    display: grid;
+    gap: 0.35rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--ink);
+    align-content: start;
+  }
+
+  .chain-key {
+    font-family: var(--mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .chain strong {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .chain > div > span:last-child {
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .method-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2fr);
+    gap: clamp(1rem, 3vw, 3rem);
+    align-items: baseline;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .method-note { color: var(--muted); font-size: 0.88rem; }
+
+  .method {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.6rem;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .method li { display: inline-flex; align-items: baseline; gap: 0.45rem; }
+
+  .method span {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+  }
+
+  /* ---------- work ---------- */
+
+  .entry {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: clamp(1rem, 2.5vw, 2.5rem);
+    padding-block: clamp(2rem, 4vw, 3.2rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .entry:first-of-type { border-top: 1px solid var(--ink); padding-top: clamp(1.5rem, 3vw, 2.2rem); }
+
+  .entry-index {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+  }
+
+  .entry h3 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: var(--step-1);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .entry-sub {
+    margin-top: 0.45rem;
+    font-family: var(--mono);
+    font-size: 0.67rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .entry-body { margin-top: 1.15rem; max-width: 68ch; color: var(--ink-soft); }
+
+  .stack {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.9rem;
+    padding: 0;
+    margin: 1.5rem 0 0;
+  }
+
+  .stack li {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  .stack li + li::before {
+    content: "/";
+    color: var(--line);
+    margin-right: 0.9rem;
+  }
+
+  .case-label {
+    margin-top: 1.6rem;
+    font-family: var(--mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .cases {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+  }
+
+  .cases li {
+    display: grid;
+    grid-template-columns: 5.2rem minmax(0, 1fr) 9.5rem;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.62rem 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .cases li:first-child { border-top: 1px solid var(--ink); }
+
+  .cases .cid {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .cases .case-name { font-size: 0.86rem; line-height: 1.45; }
+
+  .cases .tech {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    color: var(--muted);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .repo {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 0.15rem;
+    overflow-wrap: anywhere;
+  }
+
+  .repo:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ---------- background ---------- */
+
+  .bg-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  .col-label {
+    font-family: var(--mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .job { margin-top: 1.3rem; }
+
+  .job h3 {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .job-meta {
+    margin-top: 0.35rem;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  .job-meta .where { color: var(--accent); }
+
+  .job ul {
+    margin: 1.1rem 0 0;
+    padding-left: 1.05rem;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+
+  .job li { margin-block: 0.5rem; }
+  .job li::marker { color: var(--accent); }
+
+  .cred {
+    list-style: none;
+    margin: 1.3rem 0 0;
+    padding: 0;
+  }
+
+  .cred li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.2rem 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .cred strong { font-weight: 600; font-size: 0.92rem; }
+
+  .cred .detail {
+    grid-column: 1;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .cred .status {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .cred .status[data-state="done"] { color: var(--muted); }
+
+  /* ---------- toolkit ---------- */
+
+  .tools {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
+    max-width: 52rem;
+    margin: 0;
+  }
+
+  .tools dt {
+    padding: 0.95rem 1.5rem 0.95rem 0;
+    border-top: 1px solid var(--line-soft);
+    font-family: var(--mono);
+    font-size: 0.71rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+
+  .tools dd {
+    margin: 0;
+    padding: 0.95rem 0;
+    border-top: 1px solid var(--line-soft);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .tools .lab-only { color: var(--accent); }
+
+  /* ---------- contact ---------- */
+
+  .contact {
+    background: var(--panel);
+    color: var(--panel-ink);
+    border-top: 1px solid var(--ink);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .contact h2 { color: var(--panel-ink); }
+
+  .contact-copy {
+    margin-top: 1.1rem;
+    color: var(--panel-muted);
+    max-width: 44ch;
+    font-size: 0.96rem;
+  }
+
+  .mail {
+    display: inline-block;
+    margin-top: 0.35rem;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 0.9rem + 1.9vw, 2.1rem);
+    letter-spacing: -0.02em;
+    color: var(--panel-accent);
+    text-decoration: none;
+    border-bottom: 2px solid var(--panel-accent);
+    padding-bottom: 0.12em;
+    overflow-wrap: anywhere;
+  }
+
+  .mail:hover { color: #ff8c68; border-bottom-color: #ff8c68; }
+
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.75rem;
+    margin-top: 2rem;
+  }
+
+  .contact-links a {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    padding-block: 0.4rem;
+    color: var(--panel-ink);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(233, 235, 230, 0.28);
+    padding-bottom: 0.15rem;
+  }
+
+  .contact-links a:hover { color: var(--panel-accent); border-bottom-color: var(--panel-accent); }
+
+  .contact-side {
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(233, 235, 230, 0.2);
+    font-size: 0.88rem;
+    color: var(--panel-muted);
+  }
+
+  .contact-side p + p { margin-top: 0.9rem; }
+
+  /* ---------- footer ---------- */
+
+  .foot {
+    border-top: 1px solid var(--line);
+    padding-block: 1.6rem;
+  }
+
+  .foot-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem 2rem;
+    font-size: 0.74rem;
+    color: var(--muted);
+  }
+
+  /* ---------- motion ---------- */
+
+  .reveal {
+    animation: reveal 0.9s var(--ease-out) backwards;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(18px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { animation: none; }
+    .caret { animation: none; }
+  }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: minmax(0, 1fr); }
+    .log { max-width: 34rem; }
+    .head { grid-template-columns: minmax(0, 1fr); gap: 0.9rem; align-items: start; }
+    .chain { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .method-wrap { grid-template-columns: minmax(0, 1fr); gap: 0.9rem; }
+    .bg-grid, .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  @media (max-width: 620px) {
+    .brand-name { display: none; }
+    .site-nav { gap: 0.9rem; font-size: 0.8rem; }
+    .site-nav a { font-size: 0.78rem; }
+    h1 { letter-spacing: -0.03em; }
+    .entry { grid-template-columns: minmax(0, 1fr); gap: 0.4rem; }
+    .entry-index { font-size: 0.68rem; }
+    .chain { grid-template-columns: minmax(0, 1fr); }
+    .cases li { grid-template-columns: 4.4rem minmax(0, 1fr); gap: 0.15rem 0.8rem; }
+    .cases .tech { grid-column: 2; text-align: left; white-space: normal; padding-top: 0.1rem; }
+    .hero-meta { flex-direction: column; gap: 0.3rem; }
+    .hero-meta span + span::before { display: none; }
+    .tools { grid-template-columns: minmax(0, 1fr); }
+    .tools dt { padding-bottom: 0.15rem; border-top: 1px solid var(--line-soft); }
+    .tools dd { padding-top: 0.15rem; border-top: 0; padding-bottom: 1.1rem; }
+    .log-list { font-size: 0.78rem; padding-inline: 1.1rem; }
+    .log-head { padding-inline: 1.1rem; }
+    .log-list li { grid-template-columns: 3.6rem 2.9rem minmax(0, 1fr); gap: 0.5rem; }
+    .foot-inner { flex-direction: column; }
+  }
+</style>
 </head>
 
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<!-- NAVIGATION -->
-
-<header>
-    <div class="container">
-        <nav>
-            <a class="brand" href="#home">BW / CYBERSECURITY</a>
-
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#credentials">Credentials</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="#top" aria-label="Bryll Wrex Umangay, back to top">
+      <span class="brand-mark" aria-hidden="true">BWU</span>
+      <span class="brand-name">Bryll Wrex Umangay</span>
+    </a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#lab">Lab</a>
+      <a href="#work">Work</a>
+      <a href="#background">Background</a>
+      <a href="#toolkit">Toolkit</a>
+      <a class="nav-mail" href="#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 
+<main id="main">
 
-<!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-grid">
 
-<main id="home">
-    <div class="container">
-        <div class="hero">
+        <div class="hero-copy">
+          <h1 class="reveal" style="--i:0">Bryll Wrex<br>Umangay</h1>
 
-            <div>
-                <div class="eyebrow">
-                    IT SUPPORT / SECURITY OPERATIONS / DEFENSIVE RESEARCH
-                </div>
+          <p class="hero-role reveal" style="--i:1">
+            IT helpdesk engineer, moving into security operations
+          </p>
 
-                <h1>
-                    BRYLL WREX
-                    <span>UMANGAY.</span>
-                </h1>
+          <p class="hero-lede reveal" style="--i:2">
+            Weekdays I run Level 1 support at Opus Corporation: Windows
+            desktops, Active Directory, and the end user whose printer has
+            decided to stop. After hours I run the same work from the other
+            side. I build the attack in a Wazuh lab, triage what it leaves in
+            the telemetry, and write the case up the way a shift handover needs it.
+          </p>
 
-                <h2>
-                    IT Helpdesk Engineer |
-                    Aspiring SOC Analyst |
-                    Cybersecurity Enthusiast
-                </h2>
+          <div class="actions reveal" style="--i:3">
+            <a class="btn btn-primary" href="#work">Read the case register</a>
+            <a class="btn btn-ghost" href="mailto:vryllumangay@gmail.com">Email me</a>
+          </div>
 
-                <p class="hero-description">
-                    Information Technology graduate with hands-on
-                    experience in Level 1 technical support,
-                    Windows administration, and troubleshooting.
-
-                    Building practical cybersecurity skills through
-                    SOC home labs, SIEM investigations, detection
-                    engineering, and malware analysis.
-                </p>
-
-                <div class="buttons">
-                    <a href="#projects" class="button button-primary">
-                        Explore My Projects
-                    </a>
-
-                    <a href="#contact" class="button button-secondary">
-                        Get In Touch
-                    </a>
-
-                    <!-- Add your PDF CV to the assets folder
-                         before using this download button. -->
-
-                    <a
-                        href="assets/Bryll-Wrex-Umangay-CV.pdf"
-                        class="button button-secondary"
-                        download
-                    >
-                        Download CV
-                    </a>
-                </div>
-            </div>
-
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="terminal-title">
-                        bryll@cyber-lab: ~
-                    </div>
-                </div>
-
-                <div class="terminal-content">
-
-                    <div class="terminal-line">
-                        <span>$</span> whoami
-                    </div>
-                    <div class="terminal-value">
-                        Bryll Wrex Umangay
-                    </div>
-
-                    <div class="terminal-line">
-                        <span>$</span> current_focus
-                    </div>
-                    <div class="terminal-value">
-                        Security Operations
-                    </div>
-
-                    <div class="terminal-line">
-                        <span>$</span> specialization
-                    </div>
-                    <div class="terminal-value">
-                        SIEM / Detection / Investigation
-                    </div>
-
-                    <div class="terminal-line">
-                        <span>$</span> environment
-                    </div>
-                    <div class="terminal-value">
-                        Wazuh / Windows / Linux / AD
-                    </div>
-
-                    <div class="terminal-line">
-                        <span>$</span> location
-                    </div>
-                    <div class="terminal-value">
-                        Makati, Philippines
-                    </div>
-
-                    <div class="terminal-line">
-                        <span>$</span> status
-                    </div>
-                    <div class="terminal-value">
-                        <span>Learning. Building. Investigating.</span>
-                    </div>
-
-                </div>
-            </div>
-
+          <p class="hero-meta reveal" style="--i:4">
+            <span>Makati, Philippines</span>
+            <span>Fortinet NSE 1 &amp; 2</span>
+            <span>CompTIA Security+ in progress</span>
+          </p>
         </div>
+
+        <aside class="log reveal" style="--i:2" aria-label="Career log, 2021 to now">
+          <div class="log-head">
+            <span>event log</span>
+            <span>2021 &rarr; now</span>
+          </div>
+          <ol class="log-list">
+            <li>
+              <time datetime="2021">2021</time>
+              <span class="tag">study</span>
+              <p>BS Information Technology, Golden West Colleges</p>
+            </li>
+            <li>
+              <time datetime="2025">2025</time>
+              <span class="tag">grad</span>
+              <p>Graduated; Fortinet NSE 1 and NSE 2 certified</p>
+            </li>
+            <li>
+              <time datetime="2025-06">2025-06</time>
+              <span class="tag">work</span>
+              <p>IT Helpdesk Engineer, Opus Corporation</p>
+            </li>
+            <li>
+              <time datetime="2025">2025</time>
+              <span class="tag">lab</span>
+              <p>Wazuh manager built on Ubuntu Server</p>
+            </li>
+            <li>
+              <time datetime="2025">2025</time>
+              <span class="tag">lab</span>
+              <p>Sysmon on Windows 10; AD DS domain controller</p>
+            </li>
+            <li>
+              <time datetime="2025">2025</time>
+              <span class="tag">lab</span>
+              <p>Kali Linux, for the attack side</p>
+            </li>
+            <li>
+              <time datetime="2026">2026</time>
+              <span class="tag">cases</span>
+              <p>Seven case files, from brute force to Kerberoasting</p>
+            </li>
+            <li>
+              <time datetime="2026">2026</time>
+              <span class="tag">train</span>
+              <p>Viettel MSOC training in progress</p>
+            </li>
+            <li>
+              <time datetime="2026">2026</time>
+              <span class="tag">next</span>
+              <p>CompTIA Security+, then a seat on a SOC team</p>
+            </li>
+            <li class="log-now">
+              <span class="prompt" aria-hidden="true">$</span>
+              <p>tail -f detection-lab.log<span class="caret" aria-hidden="true">&#9612;</span></p>
+            </li>
+          </ol>
+        </aside>
+
+      </div>
     </div>
+  </section>
+
+  <!-- THE LAB -->
+
+  <section id="lab">
+    <div class="wrap">
+      <div class="head">
+        <h2>A small network I am allowed to break.</h2>
+        <p>
+          Four machines on one host: an attacker, a victim with Sysmon, a
+          domain controller, and a SIEM watching all of it. Every case file
+          starts here, on machines I can reset when the attack works.
+        </p>
+      </div>
+
+      <div class="chain">
+        <div>
+          <span class="chain-key">Attack</span>
+          <strong>Kali Linux</strong>
+          <span>Metasploit, msfvenom, Impacket, NetExec</span>
+        </div>
+        <div>
+          <span class="chain-key">Telemetry</span>
+          <strong>Windows 10 + Sysmon</strong>
+          <span>Process trees, network, registry</span>
+        </div>
+        <div>
+          <span class="chain-key">Identity</span>
+          <strong>Windows Server</strong>
+          <span>AD DS, Kerberos, NTLM, DNS, Group Policy</span>
+        </div>
+        <div>
+          <span class="chain-key">Detection</span>
+          <strong>Wazuh SIEM</strong>
+          <span>Custom rules, Sigma, alert triage</span>
+        </div>
+      </div>
+
+      <div class="method-wrap">
+        <p class="method-note">Nothing gets written up until all five steps are done.</p>
+        <ol class="method">
+          <li><span>01</span>Simulate</li>
+          <li><span>02</span>Collect</li>
+          <li><span>03</span>Detect</li>
+          <li><span>04</span>Investigate</li>
+          <li><span>05</span>Report</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+
+  <section id="work">
+    <div class="wrap">
+      <div class="head">
+        <h2>Selected work</h2>
+        <p>
+          Three repositories, all built in environments I control. The first
+          is the one that matters most if you are hiring for a SOC: a
+          detection lab, run like a queue of real alerts.
+        </p>
+      </div>
+
+      <article class="entry">
+        <div class="entry-index" aria-hidden="true">01</div>
+        <div>
+          <h3>SOC Analyst Portfolio</h3>
+          <p class="entry-sub">Detection engineering home lab</p>
+
+          <p class="entry-body">
+            A Wazuh SIEM watching a Windows 10 endpoint, a Windows Server
+            domain controller and a Kali attacker. I run the technique, then
+            do the analyst side of it: triage the alert, pull the timeline out
+            of the logs, collect the IOCs, map the technique, and write or
+            tune the rule that would have caught it sooner. Seven case files
+            so far, each with the simulation, the triage, the mapping and the
+            remediation a responder would need.
+          </p>
+
+          <p class="case-label">Case register &mdash; six of the seven files</p>
+          <ol class="cases">
+            <li>
+              <span class="cid">CASE 01</span>
+              <span class="case-name">Brute force and password spraying over SMB</span>
+              <span class="tech">T1110.001, T1110.003</span>
+            </li>
+            <li>
+              <span class="cid">CASE 02</span>
+              <span class="case-name">Malicious PowerShell: IEX download cradle, AMSI bypass</span>
+              <span class="tech">T1059.001, T1562.001</span>
+            </li>
+            <li>
+              <span class="cid">CASE 03</span>
+              <span class="case-name">Scheduled task persistence</span>
+              <span class="tech">T1053.005</span>
+            </li>
+            <li>
+              <span class="cid">CASE 04</span>
+              <span class="case-name">Backdoor account creation</span>
+              <span class="tech">T1136.001</span>
+            </li>
+            <li>
+              <span class="cid">CASE 05</span>
+              <span class="case-name">Windows event log clearing</span>
+              <span class="tech">T1070.001</span>
+            </li>
+            <li>
+              <span class="cid">CASE 06</span>
+              <span class="case-name">Kerberoasting</span>
+              <span class="tech">T1558.003</span>
+            </li>
+          </ol>
+
+          <ul class="stack">
+            <li>Wazuh SIEM</li>
+            <li>Sysmon</li>
+            <li>Windows Server / AD DS</li>
+            <li>Kali Linux</li>
+            <li>Sigma</li>
+            <li>MITRE ATT&amp;CK</li>
+          </ul>
+
+          <a class="repo" href="https://github.com/BryllUmangay/SOC-analyst-portfolio"
+             target="_blank" rel="noopener noreferrer">github.com/BryllUmangay/SOC-analyst-portfolio</a>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-index" aria-hidden="true">02</div>
+        <div>
+          <h3>Post-Compromise Operations on Windows &amp; Linux</h3>
+          <p class="entry-sub">Controlled attack lifecycle</p>
+
+          <p class="entry-body">
+            A full lifecycle across two hosts: phishing-style initial access,
+            msfvenom payloads for Windows and Linux, two Meterpreter shells,
+            host and network reconnaissance, WinPEAS enumeration, document
+            exfiltration and browser credential extraction, Mimikatz hash
+            dumping, a PowerShell keylogger, and persistence through a root
+            backdoor account. The write-up keeps the defender's side in view:
+            what every step leaves behind in event logs, process trees and
+            network traffic.
+          </p>
+
+          <ul class="stack">
+            <li>Metasploit</li>
+            <li>msfvenom</li>
+            <li>Mimikatz</li>
+            <li>WinPEAS</li>
+            <li>PowerShell</li>
+            <li>Windows 10 Pro</li>
+            <li>Ubuntu Server</li>
+          </ul>
+
+          <a class="repo" href="https://github.com/BryllUmangay/Post-Compromise-Operations-on-Windows-Linux-Hosts"
+             target="_blank" rel="noopener noreferrer">github.com/BryllUmangay/Post-Compromise-Operations-on-Windows-Linux-Hosts</a>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-index" aria-hidden="true">03</div>
+        <div>
+          <h3>Remote Access Trojan: Malware Analysis</h3>
+          <p class="entry-sub">Static and dynamic analysis, isolated VM</p>
+
+          <p class="entry-body">
+            An NjRAT 0.7d sample taken apart in an isolated virtual machine:
+            static inspection in PE Studio, behaviour in Procmon, network
+            traffic through FakeNet-NG, persistence, indicators of compromise,
+            ATT&amp;CK technique mapping, and YARA and VirusTotal checks on
+            what the sample actually does.
+          </p>
+
+          <ul class="stack">
+            <li>Procmon</li>
+            <li>FakeNet-NG</li>
+            <li>PE Studio</li>
+            <li>Wireshark</li>
+            <li>YARA</li>
+            <li>VirusTotal</li>
+          </ul>
+
+          <a class="repo" href="https://github.com/BryllUmangay/Remote_access_TROJAN_malware_analysis"
+             target="_blank" rel="noopener noreferrer">github.com/BryllUmangay/Remote_access_TROJAN_malware_analysis</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- BACKGROUND -->
+
+  <section id="background">
+    <div class="wrap">
+      <div class="head">
+        <h2>Helpdesk first, then the lab.</h2>
+        <p>
+          Support is where the users are; the lab is where I learned what the
+          evidence looks like when something is actually wrong.
+        </p>
+      </div>
+
+      <div class="bg-grid">
+        <div>
+          <p class="col-label">Experience</p>
+          <div class="job">
+            <h3>IT Helpdesk Engineer</h3>
+            <p class="job-meta"><span class="where">Opus Corporation</span> &nbsp; June 2025 &mdash; present &nbsp; Level 1 support</p>
+            <ul>
+              <li>Frontline support across Windows desktops: hardware, software and network faults, handled remotely and on site.</li>
+              <li>Active Directory administration: account provisioning, password resets, group membership and access control.</li>
+              <li>Deployment of printers, peripherals and standard software images.</li>
+              <li>Incident documentation and knowledge-base articles that cut repeat tickets.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <p class="col-label">Certifications &amp; education</p>
+          <ul class="cred">
+            <li>
+              <strong>Fortinet NSE 1</strong>
+              <span class="status" data-state="done">Certified</span>
+              <span class="detail">Network Security Associate</span>
+            </li>
+            <li>
+              <strong>Fortinet NSE 2</strong>
+              <span class="status" data-state="done">Certified</span>
+              <span class="detail">Network Security Associate</span>
+            </li>
+            <li>
+              <strong>CompTIA Security+</strong>
+              <span class="status">Pursuing</span>
+              <span class="detail">Cybersecurity certification</span>
+            </li>
+            <li>
+              <strong>Viettel MSOC Training</strong>
+              <span class="status">In progress</span>
+              <span class="detail">Security operations centre training</span>
+            </li>
+            <li>
+              <strong>BS Information Technology</strong>
+              <span class="status" data-state="done">Graduated 2025</span>
+              <span class="detail">Golden West Colleges, Alaminos City, Pangasinan &mdash; 2021 to 2025</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLKIT -->
+
+  <section id="toolkit">
+    <div class="wrap">
+      <div class="head">
+        <h2>What I work with</h2>
+        <p>
+          Tools I use on the job, and tools I only run inside the lab. The
+          difference matters, so it is marked.
+        </p>
+      </div>
+
+      <dl class="tools">
+        <dt>IT support</dt>
+        <dd>Windows troubleshooting, Active Directory, Windows Server, IIS, hardware and software support, printer deployment, remote support</dd>
+
+        <dt>SOC &amp; detection</dt>
+        <dd>Wazuh SIEM, Sysmon, Sigma and custom Wazuh rules, DQL and KQL, Windows event logs, MITRE ATT&amp;CK mapping, alert triage, IOC analysis, incident response, Active Directory attack detection (Kerberoasting, pass-the-hash, DCSync)</dd>
+
+        <dt>Offensive tooling <span class="lab-only">(lab only)</span></dt>
+        <dd>Kali Linux, Metasploit, msfvenom, Mimikatz, WinPEAS, NetExec, Impacket, Hashcat</dd>
+
+        <dt>Malware analysis</dt>
+        <dd>Static and dynamic analysis, Procmon, FakeNet-NG, PE Studio, Wireshark, YARA, IOC identification</dd>
+
+        <dt>Cloud &amp; infrastructure</dt>
+        <dd>AWS (EC2, VPC, subnets, route tables, internet and NAT gateways, security groups, application load balancer), Azure fundamentals, Ubuntu, Nginx, Docker, VMware</dd>
+
+        <dt>Scripting</dt>
+        <dd>PowerShell, Bash, Python (basic), C (basic), Git and GitHub</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <h2>Open to SOC analyst roles.</h2>
+          <p class="contact-copy">
+            If your team needs a level one analyst who already reads the logs
+            for fun, and who can hand back a case file rather than a screenshot,
+            write to me.
+          </p>
+          <a class="mail" href="mailto:vryllumangay@gmail.com">vryllumangay@gmail.com</a>
+        </div>
+
+        <div class="contact-side">
+          <p>Makati, Philippines. Open to on-site, hybrid or remote work.</p>
+          <p>Résumé and project documentation available on request.</p>
+          <div class="contact-links">
+            <a href="https://github.com/BryllUmangay" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/bryll-wrex-umangay" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="tel:+639774084746">+63 977 408 4746</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-
-<!-- ABOUT -->
-
-<section id="about">
-    <div class="container">
-
-        <div class="section-label">01 / PROFILE</div>
-        <h2 class="section-title">About Me</h2>
-
-        <div class="about-content">
-
-            <div class="about-text">
-                <p>
-                    I am an Information Technology graduate and
-                    IT Helpdesk Engineer with experience supporting
-                    Windows environments, administering Active
-                    Directory, resolving end-user issues, and
-                    troubleshooting hardware, software, and
-                    network-related problems.
-                </p>
-
-                <p>
-                    My professional development is focused on
-                    transitioning into cybersecurity, particularly
-                    Security Operations Center (SOC) analysis,
-                    threat detection, incident investigation, and
-                    defensive security research.
-                </p>
-
-                <p>
-                    I build isolated laboratory environments to
-                    understand attacker behavior, validate endpoint
-                    telemetry, investigate security alerts, identify
-                    indicators of compromise, and document findings.
-                    My goal is to develop practical skills that
-                    translate into real-world defensive operations.
-                </p>
-            </div>
-
-            <div class="focus-card">
-                <h3>Current Learning Focus</h3>
-
-                <div class="focus-item">
-                    <span>01.</span> SOC Operations & Alert Triage
-                </div>
-
-                <div class="focus-item">
-                    <span>02.</span> Wazuh SIEM & Detection Engineering
-                </div>
-
-                <div class="focus-item">
-                    <span>03.</span> Windows Event Log Investigation
-                </div>
-
-                <div class="focus-item">
-                    <span>04.</span> Active Directory Security
-                </div>
-
-                <div class="focus-item">
-                    <span>05.</span> Malware Analysis & Threat Hunting
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<!-- EXPERIENCE -->
-
-<section id="experience">
-    <div class="container">
-
-        <div class="section-label">02 / PROFESSIONAL BACKGROUND</div>
-        <h2 class="section-title">Work Experience</h2>
-
-        <p class="section-description">
-            My professional foundation in IT support,
-            troubleshooting, and Windows administration.
-        </p>
-
-        <div class="experience-card">
-
-            <div class="experience-top">
-                <div>
-                    <h3>IT Helpdesk Engineer</h3>
-                    <div class="company">
-                        OPUS CORPORATION
-                    </div>
-                    <div class="date">
-                        Level 1 Technical Support
-                    </div>
-                </div>
-
-                <div class="date">
-                    June 2025 – Present
-                </div>
-            </div>
-
-            <ul>
-                <li>
-                    Provide frontline technical support to end users,
-                    resolving hardware, software, and network issues
-                    across Windows desktop environments.
-                </li>
-
-                <li>
-                    Administer Active Directory, including user
-                    account provisioning, password resets, group
-                    membership management, and access control.
-                </li>
-
-                <li>
-                    Deploy and configure printers, peripherals,
-                    and standard software; perform remote support
-                    and on-site troubleshooting.
-                </li>
-
-                <li>
-                    Document incidents and resolutions and
-                    contribute to knowledge-base documentation
-                    to improve support processes.
-                </li>
-            </ul>
-
-        </div>
-    </div>
-</section>
-
-
-<!-- PROJECTS -->
-
-<section id="projects">
-    <div class="container">
-
-        <div class="section-label">03 / HANDS-ON EXPERIENCE</div>
-        <h2 class="section-title">Cybersecurity Projects</h2>
-
-        <p class="section-description">
-            Practical security projects conducted in isolated,
-            personally controlled laboratory environments.
-            Each project includes technical documentation,
-            observations, and defensive learning outcomes.
-        </p>
-
-        <div class="project-grid">
-
-            <!-- PROJECT 01 -->
-
-            <article class="project-card">
-
-                <div class="project-number">PROJECT_01 / SOC</div>
-
-                <h3>SOC Analyst Portfolio</h3>
-
-                <div class="project-subtitle">
-                    DETECTION ENGINEERING & INCIDENT INVESTIGATION
-                </div>
-
-                <p>
-                    A hands-on SOC home lab built around Wazuh SIEM,
-                    Sysmon, Windows endpoints, Active Directory,
-                    and Kali Linux.
-
-                    Documents simulated security scenarios and
-                    defensive investigations, including SMB brute
-                    force, password spraying, suspicious PowerShell,
-                    scheduled-task persistence, event-log clearing,
-                    and Kerberoasting.
-
-                    Each case covers telemetry validation, Wazuh
-                    alert analysis, indicators of compromise,
-                    investigation timelines, MITRE ATT&CK mapping,
-                    and remediation recommendations.
-                </p>
-
-                <div class="tags">
-                    <span class="tag">Wazuh SIEM</span>
-                    <span class="tag">Sysmon</span>
-                    <span class="tag">Windows Logs</span>
-                    <span class="tag">Active Directory</span>
-                    <span class="tag">Sigma</span>
-                    <span class="tag">MITRE ATT&CK</span>
-                </div>
-
-                <a
-                    class="project-link"
-                    href="https://github.com/BryllUmangay/SOC-analyst-portfolio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    View Repository →
-                </a>
-
-            </article>
-
-
-            <!-- PROJECT 02 -->
-
-            <article class="project-card">
-
-                <div class="project-number">PROJECT_02 / HOST SECURITY</div>
-
-                <h3>Post-Compromise Operations on Windows & Linux</h3>
-
-                <div class="project-subtitle">
-                    CONTROLLED ATTACK-LIFECYCLE LAB
-                </div>
-
-                <p>
-                    A controlled Windows 10 Pro and Ubuntu Server
-                    laboratory demonstrating post-compromise
-                    behaviors across Windows and Linux hosts.
-
-                    Covers initial-access simulation, reverse-shell
-                    behavior, host reconnaissance, privilege and
-                    credential-related security testing, data
-                    access, and persistence demonstrations.
-
-                    The project explores the security implications
-                    of these activities and provides an opportunity
-                    to understand the telemetry and defensive
-                    controls relevant to compromised systems.
-                </p>
-
-                <div class="tags">
-                    <span class="tag">Kali Linux</span>
-                    <span class="tag">Metasploit</span>
-                    <span class="tag">Windows 10 Pro</span>
-                    <span class="tag">Ubuntu</span>
-                    <span class="tag">Mimikatz</span>
-                    <span class="tag">WinPEAS</span>
-                </div>
-
-                <a
-                    class="project-link"
-                    href="https://github.com/BryllUmangay/Post-Compromise-Operations-on-Windows-Linux-Hosts"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    View Repository →
-                </a>
-
-            </article>
-
-
-            <!-- PROJECT 03 -->
-
-            <article class="project-card">
-
-                <div class="project-number">PROJECT_03 / MALWARE RESEARCH</div>
-
-                <h3>Remote Access Trojan Malware Analysis</h3>
-
-                <div class="project-subtitle">
-                    NJRAT V0.7D / STATIC & DYNAMIC ANALYSIS
-                </div>
-
-                <p>
-                    An isolated virtual-machine malware analysis
-                    laboratory focused on understanding NjRAT
-                    behavior and identifying indicators of
-                    compromise.
-
-                    Conducted static and dynamic analysis,
-                    monitored process and registry activity,
-                    examined network communications using
-                    FakeNet-NG and Wireshark, and documented
-                    persistence behavior, malware characteristics,
-                    and MITRE ATT&CK techniques.
-
-                    The repository focuses on malware understanding,
-                    threat identification, and defensive research.
-                </p>
-
-                <div class="tags">
-                    <span class="tag">Procmon</span>
-                    <span class="tag">FakeNet-NG</span>
-                    <span class="tag">PE Studio</span>
-                    <span class="tag">Wireshark</span>
-                    <span class="tag">YARA</span>
-                    <span class="tag">IOC Analysis</span>
-                </div>
-
-                <a
-                    class="project-link"
-                    href="https://github.com/BryllUmangay/Remote_access_TROJAN_malware_analysis"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    View Repository →
-                </a>
-
-            </article>
-
-        </div>
-    </div>
-</section>
-
-
-<!-- INVESTIGATION METHODOLOGY -->
-
-<section id="methodology">
-    <div class="container">
-
-        <div class="section-label">04 / ANALYST WORKFLOW</div>
-        <h2 class="section-title">My Investigation Approach</h2>
-
-        <p class="section-description">
-            A structured approach to understanding security events
-            and documenting laboratory investigations.
-        </p>
-
-        <div class="workflow">
-
-            <div class="workflow-item">
-                <strong>01. Understand</strong>
-                <small>Identify the scenario</small>
-            </div>
-
-            <div class="workflow-item">
-                <strong>02. Simulate</strong>
-                <small>Generate lab activity</small>
-            </div>
-
-            <div class="workflow-item">
-                <strong>03. Detect</strong>
-                <small>Validate telemetry</small>
-            </div>
-
-            <div class="workflow-item">
-                <strong>04. Investigate</strong>
-                <small>Analyze evidence</small>
-            </div>
-
-            <div class="workflow-item">
-                <strong>05. Document</strong>
-                <small>Conclude & recommend</small>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<!-- TECHNICAL SKILLS -->
-
-<section id="skills">
-    <div class="container">
-
-        <div class="section-label">05 / TECHNICAL CAPABILITIES</div>
-        <h2 class="section-title">Technical Skills</h2>
-
-        <p class="section-description">
-            Technologies, platforms, and tools used in my
-            professional IT support work and hands-on labs.
-        </p>
-
-        <div class="skills-grid">
-
-            <div class="skill-card">
-                <h3>SOC & Detection Engineering</h3>
-                <p>
-                    Wazuh SIEM, Sysmon, Windows Event Logs,
-                    Sigma, Custom Wazuh Rules, DQL/KQL,
-                    MITRE ATT&CK Mapping, Alert Triage,
-                    IOC Analysis, Incident Response.
-                </p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Windows & Active Directory</h3>
-                <p>
-                    Windows Troubleshooting, Windows Server,
-                    Active Directory Domain Services,
-                    DNS, Group Policy, Kerberos, NTLM,
-                    IIS, User Administration, Access Control.
-                </p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Network & Security Tools</h3>
-                <p>
-                    TCP/IP, DNS, SMB, Wireshark, Nmap,
-                    Kali Linux, NetExec, Impacket,
-                    Hashcat, Metasploit, Mimikatz.
-                    Used for controlled security testing and lab work.
-                </p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Malware & Threat Research</h3>
-                <p>
-                    Static Analysis, Dynamic Analysis,
-                    Process Monitoring, IOC Identification,
-                    FakeNet-NG, Procmon, PE Studio,
-                    Network Traffic Analysis, YARA.
-                </p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Cloud Infrastructure</h3>
-                <p>
-                    AWS EC2, VPC, Subnets, Route Tables,
-                    Internet Gateway, NAT Gateway,
-                    Security Groups, Application Load Balancer,
-                    Azure Fundamentals, Cloud Networking.
-                </p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Infrastructure & Linux</h3>
-                <p>
-                    Ubuntu Linux, Nginx, Docker, VMware,
-                    Git/GitHub, Windows Server,
-                    Active Directory, DNS, Group Policy.
-                </p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Scripting & Automation</h3>
-                <p>
-                    PowerShell, Bash, Python (Basic),
-                    C (Basic), Windows Administration,
-                    Troubleshooting Automation.
-                </p>
-            </div>
-
-            <div class="skill-card">
-                <h3>IT Support & Administration</h3>
-                <p>
-                    Level 1 Technical Support, Windows
-                    Troubleshooting, Hardware and Software
-                    Support, Printer Deployment, Remote Support,
-                    Ticket Documentation.
-                </p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<!-- CERTIFICATIONS AND EDUCATION -->
-
-<section id="credentials">
-    <div class="container">
-
-        <div class="section-label">06 / QUALIFICATIONS</div>
-        <h2 class="section-title">Certifications & Education</h2>
-
-        <div class="credentials-grid">
-
-            <div class="credential-card">
-                <h3>Certifications & Training</h3>
-
-                <div class="credential-item">
-                    <strong>Fortinet NSE 1</strong>
-                    <span>Network Security Associate</span>
-                </div>
-
-                <div class="credential-item">
-                    <strong>Fortinet NSE 2</strong>
-                    <span>Network Security Associate</span>
-                </div>
-
-                <div class="credential-item">
-                    <strong>Viettel MSOC Training</strong>
-                    <span>Security Operations Training</span>
-                    <span class="status">IN PROGRESS</span>
-                </div>
-
-                <div class="credential-item">
-                    <strong>CompTIA Security+</strong>
-                    <span>Cybersecurity Certification</span>
-                    <span class="status">PURSUING</span>
-                </div>
-            </div>
-
-
-            <div class="credential-card">
-                <h3>Education</h3>
-
-                <div class="credential-item">
-                    <strong>
-                        Bachelor of Science in Information Technology
-                    </strong>
-                    <span>Golden West Colleges</span>
-                    <br>
-                    <span>Alaminos City, Pangasinan</span>
-                    <br>
-                    <span class="status">GRADUATED · 2025</span>
-                </div>
-
-                <div class="credential-item">
-                    <strong>Academic Period</strong>
-                    <span>2021 – 2025</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<!-- CONTACT -->
-
-<section id="contact">
-    <div class="container">
-
-        <div class="contact-box">
-
-            <div class="section-label">
-                07 / LET'S CONNECT
-            </div>
-
-            <h2>Let's Connect.</h2>
-
-            <p>
-                Interested in my projects, technical work,
-                or potential cybersecurity opportunities?
-                Feel free to reach out.
-            </p>
-
-            <div class="contact-links">
-
-                <a href="mailto:vryllumangay@gmail.com">
-                    Email Me
-                </a>
-
-                <a
-                    href="https://github.com/BryllUmangay"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    GitHub
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/in/bryll-wrex-umangay"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    LinkedIn
-                </a>
-
-                <a href="tel:+639774084746">
-                    +63 977 408 4746
-                </a>
-
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-    <div class="container">
-        <div class="footer-content">
-
-            <p>
-                © <span id="year">2026</span>
-                Bryll Wrex Umangay.
-                All rights reserved.
-            </p>
-
-            <p>
-                Built with HTML, CSS & GitHub Pages.
-            </p>
-
-        </div>
-    </div>
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <p>&copy; <span id="year">2026</span> Bryll Wrex Umangay</p>
+    <p>Hand-written HTML and CSS. Hosted on GitHub Pages.</p>
+  </div>
 </footer>
 
-
 <script>
-    // Automatically update the copyright year.
-    document.getElementById("year").textContent =
-        new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-
 </body>
 </html>
